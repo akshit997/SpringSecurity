@@ -37,23 +37,6 @@ public class SecurityConfig {
 	{
 		return new BCryptPasswordEncoder();
 	}
-	/* In-Memory Authentication + Roles Example */
-	// @Bean
-	// public UserDetailsService user(PasswordEncoder passwordEncoder) {
-	
-	// UserDetails user = User
-	// 			.withUsername("user")
-	// 			.password(passwordEncoder.encode("password"))
-	// 			.roles("USER")
-	// 			.build();
-	
-	// UserDetails admin = User
-	// 			.withUsername("admin")
-	// 			.password(passwordEncoder.encode("admin123"))
-	// 			.roles("ADMIN")
-	// 			.build();
-	// 	return new InMemoryUserDetailsManager(user,admin);
-	// }
 
 	/* JWT Related */
 	@Bean
@@ -73,7 +56,6 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
 		http
-		//.cors(Customizer.withDefaults()) // JWT with CORS
 		.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //JWT Stateless
 		.authorizeHttpRequests(auth -> auth
 			.requestMatchers("/h2-console/**").permitAll() // Must be first - allows H2 console
